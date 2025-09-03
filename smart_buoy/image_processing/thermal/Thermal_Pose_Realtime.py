@@ -5,12 +5,10 @@ import math
 from ultralytics import YOLO
 from flirpy.camera.lepton import Lepton
 
-# 1. Load YOLO Model
 model = YOLO("yolo11n-pose_ncnn_model")
 
 prev_time = 0
 
-# 3. Logic functions from RGB code (no changes)
 def is_handsup_pose(keypoints):
     try:
         nose_y = keypoints[0][1]
@@ -35,7 +33,6 @@ def get_shoulder_distance(keypoints):
 def estimate_distance(shoulder_pixel):
     if shoulder_pixel == 0:
         return None
-    # NOTE: K 
     k = 120 # 
     return round(k / shoulder_pixel, 2)
 
@@ -43,7 +40,7 @@ def estimate_distance(shoulder_pixel):
 try:
     with Lepton() as camera:
         while True:
-            # .grab()
+
             thermal_image_16bit = camera.grab()
             
             if thermal_image_16bit is None:
@@ -72,14 +69,13 @@ try:
                     if is_handsup_pose(keypoints):
                         x, y = int(keypoints[0][0]), int(keypoints[0][1])
                         cv2.putText(annotated_frame, "RESCUE SIGN", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
-                        # ... (
+
 
             current_time = time.time()
             fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
             prev_time = current_time
             cv2.putText(annotated_frame, f"FPS: {int(fps)}", (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
-            # --- 
             # Lepton 3 
             display_frame = cv2.resize(annotated_frame, (640, 480), interpolation=cv2.INTER_NEAREST)
             cv2.imshow("Thermal Pose Detection (Lepton 3)", display_frame)
