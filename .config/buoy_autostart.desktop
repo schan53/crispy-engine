@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Smart Buoy Autostart
+Comment=Starts the smart buoy main control script on login
+Exec=lxterminal -e bash -c "echo 'Waiting for 5seconds before starting...'; sleep 5; /home/pi/Desktop/smart-buoy/image_processing/sb_main.sh"
+Terminal=true
