@@ -1,6 +1,7 @@
 # crispy-engine
 
-```smart-buoy
+```
+smart-buoy
 ├── image_processing
 │    ├── dual_camera_autodrive_lux_system.py  # 메인 제어 스크립트 (비전, AI, 모터 제어)
 │    ├── buoy_client.py             # GPS 데이터 수집 및 서버 전송 클라이언트
@@ -10,7 +11,8 @@
 └── yolo_env                      # Python 가상환경 폴더
 ```
 
-```Arduino
+```
+Arduino
 └── integrated_controll.ino        # 아두이노 통합 제어 펌웨어
 ```
 
